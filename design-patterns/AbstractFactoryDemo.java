@@ -1,5 +1,3 @@
-package com.amazon.awdstoragefeemanager.exception;
-
 public class AbstractFactoryDemo {
     public static void main(String[] args) {
         AbstractPizzaFactory dominos = PizzaFactoryProducer.getFactory("Dominos");
