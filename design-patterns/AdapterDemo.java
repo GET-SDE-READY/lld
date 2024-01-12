@@ -1,5 +1,3 @@
-package com.amazon.awdstoragefeemanager.exception;
-
 public class AdapterDemo {
     public static void main(String[] args) {
         AndroidPhone phone = new AndroidPhone(new LightningAdapter());
