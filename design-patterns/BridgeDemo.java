@@ -1,5 +1,3 @@
-package com.amazon.awdstoragefeemanager.exception;
-
 public class BridgeDemo {
     public static void main(String[] args) {
         Remote remote = new Remote(new TV());
