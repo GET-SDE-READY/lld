@@ -1,6 +1,4 @@
-package com.amazon.awd.fee;
-
-public class Application {
+public class BuilderApplication {
     public static void main(String[] args) {
         StringBuilder sb = new StringBuilder();
         sb.append("This")
