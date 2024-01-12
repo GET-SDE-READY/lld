@@ -1,5 +1,3 @@
-package com.amazon.awdstoragefeemanager.exception;
-
 public class FacadeDemo {
     public static void main(String[] args) {
         Computer computer = new Computer(new CPU(), new Memory(), new HardDisk());
