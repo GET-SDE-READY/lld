@@ -1,5 +1,3 @@
-package com.amazon.awdstoragefeemanager.exception;
-
 public class DecoratorPattern {
     public static void main(String[] args) {
         DecoratedBurger burger = new Burger();
