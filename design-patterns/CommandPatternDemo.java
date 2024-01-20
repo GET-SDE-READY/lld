@@ -1,4 +1,3 @@
-// Command interface
 interface Command {
     void execute();
 }
@@ -17,6 +16,32 @@ class LightOnCommand implements Command {
     }
 }
 
+class LightOffCommand implements Command {
+    private Light light;
+
+    public LightOffCommand(Light light) {
+        this.light = light;
+    }
+
+    @Override
+    public void execute() {
+        light.turnOff();
+    }
+}
+
+class LightShimmerCommand implements Command {
+    private Light light;
+
+    public LightShimmerCommand(Light light) {
+        this.light = light;
+    }
+
+    @Override
+    public void execute() {
+        light.shimmer();
+    }
+}
+
 // Receiver
 class Light {
     public void turnOn() {
@@ -25,6 +50,10 @@ class Light {
 
     public void turnOff() {
         System.out.println("Light is OFF");
+    }
+    
+    public void shimmer() {
+        System.out.println("Shimmering");
     }
 }
 
@@ -45,12 +74,22 @@ class RemoteControl {
 public class CommandPatternDemo {
     public static void main(String[] args) {
         Light light = new Light();
-        LightOnCommand lightOnCommand = new LightOnCommand(light);
+        Command lightOnCommand = new LightOnCommand(light);
 
         RemoteControl remote = new RemoteControl();
         remote.setCommand(lightOnCommand);
 
         // Pressing the button triggers the command
+        remote.pressButton();
+
+        Command lightOffCommand = new LightOffCommand(light);
+        remote.setCommand(lightOffCommand);
+        
+        remote.pressButton();
+
+        Command lightShimmerCommand = new LightShimmerCommand(light);
+        remote.setCommand(lightShimmerCommand);
+        
         remote.pressButton();
     }
 }
