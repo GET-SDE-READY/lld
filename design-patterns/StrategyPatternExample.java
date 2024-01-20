@@ -40,3 +40,16 @@ class Sorter {
         sortingStrategy.sort(data);
     }
 }
+
+public class StrategyDemo {
+    
+    public static void main(String[] args) {
+        Sorter sorter = new Sorter();
+        
+        sorter.setSortingStrategy(new QuickSortStrategy());
+        sorter.performSort(new int[] {1, 2});
+        
+        sorter.setSortingStrategy(new MergeSortStrategy());
+        sorter.performSort(new int[] {1, 2});
+    }
+}
