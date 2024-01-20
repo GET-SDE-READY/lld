@@ -2,6 +2,7 @@
 interface EditingMode {
     void handleMouseClick();
     void handleKeyPress();
+    String getName();
 }
 
 // ConcreteState implementations
@@ -15,6 +16,10 @@ class SelectionMode implements EditingMode {
     public void handleKeyPress() {
         System.out.println("Pressed a key in selection mode.");
     }
+    
+    public String getName() {
+        return "SelectionMode";
+    }
 }
 
 class DrawingMode implements EditingMode {
@@ -26,6 +31,10 @@ class DrawingMode implements EditingMode {
     @Override
     public void handleKeyPress() {
         System.out.println("Pressed a key in drawing mode.");
+    }
+    
+    public String getName() {
+        return "DrawingMode";
     }
 }
 
@@ -39,24 +48,21 @@ class ErasingMode implements EditingMode {
     public void handleKeyPress() {
         System.out.println("Pressed a key in erasing mode.");
     }
+    
+    public String getName() {
+        return "ErasingMode";
+    }
 }
 
 class DocumentEditor {
     private EditingMode editingMode;
 
-    private EditingMode selectionMode;
-    private EditingMode drawingMode;
-    private EditingMode erasingMode;
-
     public DocumentEditor() {
-        this.selectionMode = new SelectionMode();
-        this.drawingMode = new DrawingMode();
-        this.erasingMode = new ErasingMode();
-
-        this.editingMode = selectionMode;
+        this.editingMode = new SelectionMode();
     }
 
     public void setEditingMode(EditingMode editingMode) {
+        System.out.println("Changed mode to " + editingMode.getName());
         this.editingMode = editingMode;
     }
 
@@ -83,4 +89,3 @@ public class DocumentEditorStateExample {
         editor.performMouseClick(); // Output depends on the current editing mode (now in ErasingMode)
     }
 }
-
