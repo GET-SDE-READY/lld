@@ -21,13 +21,12 @@ public class Elevator {
     public void startElevator() {
         System.out.println("Starting elevator");
         while (true) {
-
             // Check if job exists in current pool
             if (checkIfJobExists()) {
-
+                System.out.println("Check direction of movement");
                 // check the direction of movement
                 if (currentDirection == Direction.UP) {
-
+                    System.out.println("Start job processing for first job");
                     // Poll first job from the current job pool sorted in ascending order because of treeset
                     Request request = currentJobs.pollFirst();
 
@@ -100,9 +99,9 @@ public class Elevator {
             if (checkIfNewJobCanBeProcessed(request)) {
                 break;
             }
-
         }
 
+        System.out.println("We have reached destination floor -- " + request.getInternalRequest().getDestinationFloor());
     }
 
     private boolean checkIfNewJobCanBeProcessed(Request currentRequest) {
@@ -143,6 +142,7 @@ public class Elevator {
             // not entirely correct
             // actually the current direction should be as per the current floor and the source floor from external request
             currentDirection = getDirectionToGoForIdleState(request, currentFloor);
+            System.out.println("Job added to current pool");
             currentJobs.add(request);
         } else if (currentState == State.MOVING || currentState == State.STOPPED) {
             if (request.getExternalRequest().getDirectionToGo() != currentDirection) {
@@ -153,12 +153,15 @@ public class Elevator {
                 if (currentDirection == Direction.UP && request.getInternalRequest().getDestinationFloor() < currentFloor) {
                     // cannot process as we have already passed this floor
                     // add to pending jobs
+                    System.out.println("Job added to pending pool");
                     addToPendingJobs(request);
                 } else if (currentDirection == Direction.DOWN && request.getInternalRequest().getDestinationFloor() > currentFloor) {
                     // cannot process as we have already passed this floor
                     // add to pending jobs
+                    System.out.println("Job added to pending pool");
                     addToPendingJobs(request);
                 } else {
+                    System.out.println("Job added to current pool");
                     currentJobs.add(request);
                 }
             }

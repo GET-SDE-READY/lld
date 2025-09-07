@@ -1,6 +1,6 @@
 package com.getsdeready.lld.elevator.model;
 
-public class Request {
+public class Request implements Comparable<Request> {
     private ExternalRequest externalRequest;
     private InternalRequest internalRequest;
 
@@ -23,5 +23,12 @@ public class Request {
 
     public void setInternalRequest(InternalRequest internalRequest) {
         this.internalRequest = internalRequest;
+    }
+
+    @Override
+    public int compareTo(Request o) {
+        return Integer.compare(
+                this.getInternalRequest().getDestinationFloor(),
+                o.getInternalRequest().getDestinationFloor());
     }
 }
